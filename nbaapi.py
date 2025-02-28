@@ -1,5 +1,4 @@
 from nba_api.stats.endpoints import leaguedashplayerstats
-import pandas as pd
 
 #Api for 2020 nba seaason
 player_stats0 = leaguedashplayerstats.LeagueDashPlayerStats(season="2020-21").get_data_frames()[0]
@@ -35,17 +34,11 @@ def fetch_nba_fantasy_data(season):
     player_stats5 = leaguedashplayerstats.LeagueDashPlayerStats(season=season).get_data_frames()[0]
     top_players = player_stats5.sort_values(by="NBA_FANTASY_PTS_RANK", ascending=True).head(50)
     
-    # Select relevant columns
-    selected_columns = ["PLAYER_NAME", "TEAM_ABBREVIATION", "GP", "FGM", "FGA", 
-                        "FTM", "FTA", "PTS", "REB", "AST", "TOV", "STL", "BLK"]
-    
-    # Save as CSV
+    selected_columns = ["PLAYER_NAME", "TEAM_ABBREVIATION", "GP", "FGM", "FGA", "FTM", "FTA", "PTS", "REB", "AST", "TOV", "STL", "BLK"]
     top_players[selected_columns].to_csv(f"NBA_Fantasy_{season}.csv", index=False)
 
-# Fetch and save data for multiple seasons
 seasons = ["2020-21", "2021-22", "2022-23", "2023-24", "2024-25"]
 for season in seasons:
     fetch_nba_fantasy_data(season)
-
 print("CSV files have been created.")
 
