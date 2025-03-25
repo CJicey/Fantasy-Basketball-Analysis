@@ -4,7 +4,7 @@ def fetch_nba_fantasy_data(season):
     playerstats = leaguedashplayerstats.LeagueDashPlayerStats(season=season).get_data_frames()[0]
     topplayers = playerstats.sort_values(by="NBA_FANTASY_PTS_RANK", ascending=True).head(50)
     
-    columns = ["PLAYER_NAME", "TEAM_ABBREVIATION", "GP", "FG3M", "FGM", "FGA", "FTM", "FTA", "PTS", "REB", "AST", "TOV", "STL", "BLK", "FG3_PCT", "FT_PCT", "FG_PCT"]
+    columns = ["PLAYER_NAME", "TEAM_ABBREVIATION", "NBA_FANTASY_PTS", "GP", "FG3M", "FGM", "FGA", "FTM", "FTA", "PTS", "REB", "AST", "TOV", "STL", "BLK", "FG3_PCT", "FT_PCT", "FG_PCT"]
     topplayers[columns].to_csv(f"NBA_Fantasy_{season}.csv", index=False)
 
 seasons = ["2020-21", "2021-22", "2022-23", "2023-24", "2024-25"]
